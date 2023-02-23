@@ -24,6 +24,19 @@ namespace ApiStub.Controllers
             this.dataProvider = dataProvider;
         }
 
+        [HttpGet("{name:required}/{id:int}")]
+        public IActionResult Get(string name, int id)
+        {
+            _logger.Debug("GET request {name}/{id}", name, id);
+
+            var items = dataProvider.GetItems(name);
+            var item = items.FirstOrDefault(x => x[Id]?.GetValue<int>() == id);
+
+            if (item == null) return NotFound();
+
+            return Ok(item);
+        }
+
         [HttpGet("{name:required}")]
         public IActionResult Get(string name, [FromQuery]Dictionary<string, IReadOnlyList<string>> filters)
         {
