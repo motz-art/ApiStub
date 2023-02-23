@@ -1,5 +1,6 @@
 using System;
 using ApiStub.Controllers;
+using ApiStub.DataProvider;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

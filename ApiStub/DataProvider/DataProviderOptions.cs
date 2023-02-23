@@ -1,4 +1,4 @@
-namespace ApiStub.Controllers;
+namespace ApiStub.DataProvider;
 
 public class DataProviderOptions
 {
