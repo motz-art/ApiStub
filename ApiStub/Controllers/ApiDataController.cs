@@ -63,16 +63,6 @@ namespace ApiStub.Controllers
 
             var totalItems = items.Count();
 
-            if (filters.TryGetValue(Skip, out var skipValues))
-            {
-                items = items.Skip(int.Parse(skipValues.First()));
-            }
-
-            if (filters.TryGetValue(Limit, out var limitValues))
-            {
-                items = items.Take(int.Parse(limitValues.First()));
-            }
-
             if (filters.TryGetValue(OrderBy, out var orderByValues))
             {
                 var orderByValue = orderByValues.First();
@@ -97,6 +87,16 @@ namespace ApiStub.Controllers
                 }
             }
 
+            if (filters.TryGetValue(Skip, out var skipValues))
+            {
+                items = items.Skip(int.Parse(skipValues.First()));
+            }
+
+            if (filters.TryGetValue(Limit, out var limitValues))
+            {
+                items = items.Take(int.Parse(limitValues.First()));
+            }
+            
             return Ok(new
             {
                 items,
