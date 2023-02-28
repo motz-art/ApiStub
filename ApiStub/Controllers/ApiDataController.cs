@@ -15,7 +15,7 @@ namespace ApiStub.Controllers
         private const string OrderBy = "orderBy";
         private const string Id = "id";
 
-        private static ILogger _logger = Log.ForContext<ApiDataController>();
+        private static readonly ILogger Logger = Log.ForContext<ApiDataController>();
 
         private readonly IDataProvider dataProvider;
 
@@ -27,7 +27,7 @@ namespace ApiStub.Controllers
         [HttpGet("{name:required}/{id:int}")]
         public IActionResult Get(string name, int id)
         {
-            _logger.Debug("GET request {name}/{id}", name, id);
+            Logger.Debug("GET request {name}/{id}", name, id);
 
             var items = dataProvider.GetItems(name);
             var item = items.FirstOrDefault(x => x[Id]?.GetValue<int>() == id);
@@ -40,7 +40,7 @@ namespace ApiStub.Controllers
         [HttpGet("{name:required}")]
         public IActionResult Get(string name, [FromQuery]Dictionary<string, IReadOnlyList<string>> filters)
         {
-            _logger.Debug("GET request {name} with filters: {filters}", name, filters);
+            Logger.Debug("GET request {name} with filters: {filters}", name, filters);
 
             var items = dataProvider.GetItems(name) as IEnumerable<JsonObject>;
 
